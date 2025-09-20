@@ -19,8 +19,10 @@ import {
   Sun,
 } from 'lucide-react-native';
 import { getStoredUserData } from '@/utils/storage';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function HomeScreen() {
+  const { t } = useLanguage();
   const [userName, setUserName] = useState('');
   const [location, setLocation] = useState('');
 
@@ -60,7 +62,7 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <View>
-            <Text style={styles.greeting}>नमस्ते, {userName}</Text>
+            <Text style={styles.greeting}>{t('greeting')}, {userName}</Text>
             <View style={styles.locationContainer}>
               <MapPin size={16} color="#FFFFFF" />
               <Text style={styles.location}>{location}</Text>
@@ -77,8 +79,8 @@ export default function HomeScreen() {
             style={styles.heroImage}
           />
           <View style={styles.heroOverlay}>
-            <Text style={styles.heroTitle}>स्मार्त खेती के लिए आपका साथी</Text>
-            <Text style={styles.heroSubtitle}>बेहतर फसल, बेहतर भविष्य</Text>
+            <Text style={styles.heroTitle}>{t('smartFarmingPartner')}</Text>
+            <Text style={styles.heroSubtitle}>{t('betterCropBetterFuture')}</Text>
           </View>
         </View>
 
@@ -86,14 +88,14 @@ export default function HomeScreen() {
         <View style={styles.weatherCard}>
           <View style={styles.weatherHeader}>
             <Sun size={24} color="#F59E0B" />
-            <Text style={styles.weatherTitle}>आज का मौसम</Text>
+            <Text style={styles.weatherTitle}>{t('todaysWeather')}</Text>
           </View>
           <View style={styles.weatherInfo}>
             <Text style={styles.temperature}>28°C</Text>
             <View style={styles.weatherDetails}>
               <View style={styles.weatherItem}>
                 <Droplets size={16} color="#3B82F6" />
-                <Text style={styles.weatherText}>नमी: 65%</Text>
+                <Text style={styles.weatherText}>{t('humidity')}: 65%</Text>
               </View>
             </View>
           </View>
@@ -107,7 +109,7 @@ export default function HomeScreen() {
         >
           <View style={styles.cardHeader}>
             <Sprout size={24} color="#22C55E" />
-            <Text style={styles.cardTitle}>आज की सिफारिश</Text>
+            <Text style={styles.cardTitle}>{t('todaysRecommendation')}</Text>
             <ChevronRight size={20} color="#6B7280" />
           </View>
           <View style={styles.recommendationContent}>
@@ -117,13 +119,13 @@ export default function HomeScreen() {
             </Text>
             <View style={styles.scoreIndicators}>
               <View style={styles.scoreItem}>
-                <Text style={styles.scoreLabel}>लाभप्रदता</Text>
+                <Text style={styles.scoreLabel}>{t('profitability')}</Text>
                 <View style={styles.scoreBar}>
                   <View style={[styles.scoreFill, { width: '85%', backgroundColor: '#22C55E' }]} />
                 </View>
               </View>
               <View style={styles.scoreItem}>
-                <Text style={styles.scoreLabel}>पानी की बचत</Text>
+                <Text style={styles.scoreLabel}>{t('waterSaving')}</Text>
                 <View style={styles.scoreBar}>
                   <View style={[styles.scoreFill, { width: '70%', backgroundColor: '#3B82F6' }]} />
                 </View>
@@ -134,7 +136,7 @@ export default function HomeScreen() {
 
         {/* Quick Actions */}
         <View style={styles.quickActions}>
-          <Text style={styles.sectionTitle}>त्वरित कार्य</Text>
+          <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
           <View style={styles.actionGrid}>
             <TouchableOpacity
               style={styles.actionButton}
@@ -142,7 +144,7 @@ export default function HomeScreen() {
               activeOpacity={0.7}
             >
               <Search size={32} color="#FFFFFF" />
-              <Text style={styles.actionButtonText}>कीट/रोग पहचान</Text>
+              <Text style={styles.actionButtonText}>{t('pestDiseaseIdentification')}</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
@@ -151,7 +153,7 @@ export default function HomeScreen() {
               activeOpacity={0.7}
             >
               <MessageSquare size={32} color="#FFFFFF" />
-              <Text style={styles.actionButtonText}>AI से पूछें</Text>
+              <Text style={styles.actionButtonText}>{t('askAI')}</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
@@ -160,14 +162,14 @@ export default function HomeScreen() {
               activeOpacity={0.7}
             >
               <TrendingUp size={32} color="#FFFFFF" />
-              <Text style={styles.actionButtonText}>बाजार भाव</Text>
+              <Text style={styles.actionButtonText}>{t('marketPrices')}</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         {/* Recent Activity */}
         <View style={styles.recentActivity}>
-          <Text style={styles.sectionTitle}>हाल की गतिविधि</Text>
+          <Text style={styles.sectionTitle}>{t('recentActivity')}</Text>
           
           <View style={styles.activityItem}>
             <View style={styles.activityIcon}>

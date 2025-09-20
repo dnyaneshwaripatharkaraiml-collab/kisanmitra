@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { ArrowLeft, Camera, Upload, Search } from 'lucide-react-native';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PestDiseaseScreen() {
+  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -75,15 +77,15 @@ export default function PestDiseaseScreen() {
           <ArrowLeft size={24} color="#FFFFFF" />
         </TouchableOpacity>
         <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>कीट/रोग पहचान</Text>
-          <Text style={styles.headerSubtitle}>फोटो से तुरंत पहचान करें</Text>
+          <Text style={styles.headerTitle}>{t('pestDiseaseTitle')}</Text>
+          <Text style={styles.headerSubtitle}>{t('pestDiseaseSubtitle')}</Text>
         </View>
       </View>
 
       <View style={styles.content}>
         {/* Instructions */}
         <View style={styles.instructionCard}>
-          <Text style={styles.instructionTitle}>कैसे करें उपयोग?</Text>
+          <Text style={styles.instructionTitle}>{t('howToUse')}</Text>
           <Text style={styles.instructionText}>
             1. पत्ती या पौधे के प्रभावित हिस्से की स्पष्ट फोटो लें{'\n'}
             2. फोटो अपलोड करें या कैमरे से खींचें{'\n'}
@@ -112,7 +114,7 @@ export default function PestDiseaseScreen() {
             activeOpacity={0.7}
           >
             <Camera size={32} color="#FFFFFF" />
-            <Text style={styles.actionButtonText}>कैमरे से फोटो लें</Text>
+            <Text style={styles.actionButtonText}>{t('takePhoto')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -121,7 +123,7 @@ export default function PestDiseaseScreen() {
             activeOpacity={0.7}
           >
             <Upload size={32} color="#FFFFFF" />
-            <Text style={styles.actionButtonText}>गैलरी से चुनें</Text>
+            <Text style={styles.actionButtonText}>{t('selectFromGallery')}</Text>
           </TouchableOpacity>
         </View>
 

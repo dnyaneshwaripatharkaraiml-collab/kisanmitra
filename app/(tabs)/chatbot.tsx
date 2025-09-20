@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { Send, Mic, Volume2 } from 'lucide-react-native';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Message {
   id: string;
@@ -19,6 +20,7 @@ interface Message {
 }
 
 export default function ChatbotScreen() {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -101,8 +103,8 @@ export default function ChatbotScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>AI असिस्टेंट</Text>
-        <Text style={styles.headerSubtitle}>खेती की सलाह के लिए पूछें</Text>
+        <Text style={styles.headerTitle}>{t('chatbotTitle')}</Text>
+        <Text style={styles.headerSubtitle}>{t('chatbotSubtitle')}</Text>
       </View>
 
       <ScrollView
@@ -141,7 +143,7 @@ export default function ChatbotScreen() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder="अपना सवाल यहाँ लिखें..."
+          placeholder={t('askQuestion')}
           placeholderTextColor="#9CA3AF"
           value={inputText}
           onChangeText={setInputText}

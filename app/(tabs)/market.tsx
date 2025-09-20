@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { TrendingUp, TrendingDown, Calendar } from 'lucide-react-native';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MarketPrice {
   crop: string;
@@ -19,6 +20,7 @@ interface MarketPrice {
 }
 
 export default function MarketScreen() {
+  const { t } = useLanguage();
   const [selectedPeriod, setSelectedPeriod] = useState('today');
   
   const marketData: MarketPrice[] = [
@@ -33,16 +35,16 @@ export default function MarketScreen() {
   ];
 
   const periods = [
-    { id: 'today', label: 'आज' },
-    { id: 'week', label: 'सप्ताह' },
-    { id: 'month', label: 'महीना' },
+    { id: 'today', label: t('today') },
+    { id: 'week', label: t('week') },
+    { id: 'month', label: t('month') },
   ];
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>बाजार भाव</Text>
-        <Text style={styles.headerSubtitle}>आज के ताजा दाम</Text>
+        <Text style={styles.headerTitle}>{t('marketTitle')}</Text>
+        <Text style={styles.headerSubtitle}>{t('marketSubtitle')}</Text>
       </View>
 
       {/* Period Selector */}
@@ -73,7 +75,7 @@ export default function MarketScreen() {
       <View style={styles.marketInfo}>
         <Calendar size={16} color="#6B7280" />
         <Text style={styles.marketInfoText}>
-          अपडेट: आज, सुबह 10:30 बजे
+          {t('updated')}: आज, सुबह 10:30 बजे
         </Text>
       </View>
 
@@ -116,7 +118,7 @@ export default function MarketScreen() {
 
         {/* Market Analysis */}
         <View style={styles.analysisSection}>
-          <Text style={styles.sectionTitle}>बाजार विश्लेषण</Text>
+          <Text style={styles.sectionTitle}>{t('marketAnalysis')}</Text>
           
           <View style={styles.analysisCard}>
             <Text style={styles.analysisTitle}>सप्ताह का सर्वश्रेष्ठ प्रदर्शन</Text>

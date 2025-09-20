@@ -17,10 +17,16 @@ import {
   LogOut,
   ChevronRight,
 } from 'lucide-react-native';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function SettingsScreen() {
+  const { currentLanguage, changeLanguage, t } = useLanguage();
   const [selectedLanguage, setSelectedLanguage] = useState('hindi');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+
+  useEffect(() => {
+    setSelectedLanguage(currentLanguage);
+  }, [currentLanguage]);
 
   const languages = [
     { id: 'hindi', name: 'हिंदी', nameEng: 'Hindi' },
@@ -29,12 +35,13 @@ export default function SettingsScreen() {
     { id: 'kannada', name: 'ಕನ್ನಡ', nameEng: 'Kannada' },
   ];
 
-  const handleLanguageChange = (languageId: string) => {
+  const handleLanguageChange = async (languageId: string) => {
+    await changeLanguage(languageId);
     setSelectedLanguage(languageId);
     Alert.alert(
-      'भाषा बदली गई',
-      'आपकी भाषा सफलतापूर्वक बदल दी गई है।',
-      [{ text: 'ठीक है' }]
+      t('languageChanged'),
+      t('languageChangedMessage'),
+      [{ text: t('ok') }]
     );
   };
 
@@ -76,14 +83,14 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>सेटिंग्स</Text>
-        <Text style={styles.headerSubtitle}>अपनी पसंद के अनुसार सेट करें</Text>
+        <Text style={styles.headerTitle}>{t('settingsTitle')}</Text>
+        <Text style={styles.headerSubtitle}>{t('settingsSubtitle')}</Text>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Profile Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>प्रोफाइल</Text>
+          <Text style={styles.sectionTitle}>{t('profile')}</Text>
           
           <TouchableOpacity
             style={styles.settingItem}
@@ -95,7 +102,7 @@ export default function SettingsScreen() {
                 <User size={20} color="#22C55E" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={styles.settingTitle}>प्रोफाइल संपादित करें</Text>
+                <Text style={styles.settingTitle}>{t('editProfile')}</Text>
                 <Text style={styles.settingDescription}>नाम और अन्य जानकारी बदलें</Text>
               </View>
             </View>
@@ -112,7 +119,7 @@ export default function SettingsScreen() {
                 <MapPin size={20} color="#22C55E" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={styles.settingTitle}>स्थान बदलें</Text>
+                <Text style={styles.settingTitle}>{t('changeLocation')}</Text>
                 <Text style={styles.settingDescription}>आपका वर्तमान स्थान</Text>
               </View>
             </View>
@@ -122,7 +129,7 @@ export default function SettingsScreen() {
 
         {/* Language Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>भाषा और क्षेत्र</Text>
+          <Text style={styles.sectionTitle}>{t('languageAndRegion')}</Text>
           
           <TouchableOpacity
             style={styles.settingItem}
@@ -133,7 +140,7 @@ export default function SettingsScreen() {
                 <Globe size={20} color="#22C55E" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={styles.settingTitle}>भाषा</Text>
+                <Text style={styles.settingTitle}>{t('language')}</Text>
                 <Text style={styles.settingDescription}>
                   {languages.find(l => l.id === selectedLanguage)?.name}
                 </Text>
@@ -177,7 +184,7 @@ export default function SettingsScreen() {
 
         {/* Notifications Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>सूचनाएं</Text>
+          <Text style={styles.sectionTitle}>{t('notifications')}</Text>
           
           <TouchableOpacity
             style={styles.settingItem}
@@ -189,9 +196,9 @@ export default function SettingsScreen() {
                 <Bell size={20} color="#22C55E" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={styles.settingTitle}>पुश नोटिफिकेशन</Text>
+                <Text style={styles.settingTitle}>{t('pushNotifications')}</Text>
                 <Text style={styles.settingDescription}>
-                  {notificationsEnabled ? 'चालू है' : 'बंद है'}
+                  {notificationsEnabled ? t('enabled') : t('disabled')}
                 </Text>
               </View>
             </View>
@@ -213,7 +220,7 @@ export default function SettingsScreen() {
 
         {/* About Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>अन्य</Text>
+          <Text style={styles.sectionTitle}>{t('other')}</Text>
           
           <TouchableOpacity
             style={styles.settingItem}
@@ -225,7 +232,7 @@ export default function SettingsScreen() {
                 <Info size={20} color="#22C55E" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={styles.settingTitle}>ऐप के बारे में</Text>
+                <Text style={styles.settingTitle}>{t('aboutApp')}</Text>
                 <Text style={styles.settingDescription}>संस्करण और जानकारी</Text>
               </View>
             </View>
@@ -242,8 +249,8 @@ export default function SettingsScreen() {
                 <LogOut size={20} color="#EF4444" />
               </View>
               <View style={styles.settingContent}>
-                <Text style={[styles.settingTitle, styles.logoutText]}>लॉगआउट</Text>
-                <Text style={styles.settingDescription}>ऐप से बाहर निकलें</Text>
+                <Text style={[styles.settingTitle, styles.logoutText]}>{t('logout')}</Text>
+                <Text style={styles.settingDescription}>{t('logoutFromApp')}</Text>
               </View>
             </View>
           </TouchableOpacity>
