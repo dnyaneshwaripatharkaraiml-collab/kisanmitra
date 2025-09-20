@@ -176,7 +176,7 @@ export default function RecommendationDetailsScreen() {
                 <Text style={styles.scoreLabel}>
                   {getScoreLabel(cropData.soilHealthScore)}
                 </Text>
-              </div>
+              </View>
               <View style={styles.scoreBar}>
                 <View
                   style={[
