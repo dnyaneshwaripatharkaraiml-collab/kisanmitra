@@ -17,6 +17,7 @@ import {
   MapPin,
   Droplets,
   Sun,
+  TrendingUp,
 } from 'lucide-react-native';
 import { getStoredUserData } from '@/utils/storage';
 import { useLanguage } from '@/contexts/LanguageContext';
